@@ -16,7 +16,7 @@
  */
 
 #include "verilog/dv/caravel/defs.h"
-#include "csr.h"
+#include "generated/csr.h"
 
 /*
 	IO Test:
