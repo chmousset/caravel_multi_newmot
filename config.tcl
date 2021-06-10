@@ -6,7 +6,8 @@ set ::env(DESIGN_NAME) top
 
 # add your source files here
 set ::env(VERILOG_FILES) "$::env(DESIGN_DIR)/wrapper.v \
-    $::env(DESIGN_DIR)/newmot.v"
+    $::env(DESIGN_DIR)/properties.v \
+    $::env(DESIGN_DIR)/newmot.v "
 
 # target density, change this if you can't get your design to fit
 set ::env(PL_TARGET_DENSITY) 0.4
