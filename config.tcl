@@ -18,6 +18,9 @@ set ::env(FP_SIZING) absolute
 # define number of IO pads
 set ::env(SYNTH_DEFINES) "MPRJ_IO_PADS=38"
 
+# https://youtu.be/YrPZ9Y_vg6c
+set ::env(PL_RESIZER_BUFFER_OUTPUT_PORTS) 0
+
 # clock period is ns
 set ::env(CLOCK_PERIOD) "20"
 set ::env(CLOCK_PORT) "wb_clk_i"
