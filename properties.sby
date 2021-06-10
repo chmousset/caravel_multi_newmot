@@ -1,0 +1,15 @@
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal wrapper.v newmot.v
+prep -top wrapped_project
+
+[files]
+wrapper.v
+properties.v
+rest of your source files.v
+newmot.v
