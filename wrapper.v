@@ -76,6 +76,20 @@ module wrapped_project(
 
     `define OUTPUT 1'b0
     `define INPUT 1'b1
+    `define io_spi_miso 0
+    `define io_spi_clk 1
+    `define io_spi_cs 2
+    `define io_spi_mosi 3
+    `define io_pwm_native 4
+    `define io_ub_tx 5
+    `define io_ub_rx 6
+    `define io_gpio_gpio0 7
+    `define io_gpio_gpio1 8
+    `define io_x_step 9
+    `define io_x_dir 10
+    `define io_y_step 11
+    `define io_y_dir 12
+    `define io_pwm 13
 
     assign buf_io_oeb[`MPRJ_IO_PADS-1: `io_pwm +1] = {(`MPRJ_IO_PADS){`INPUT}};// default all inputs
     assign buf_io_oeb[`io_spi_miso] = `INPUT;
