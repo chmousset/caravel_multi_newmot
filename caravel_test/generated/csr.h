@@ -10,7 +10,7 @@
 #include <hw/common.h>
 #endif /* ! CSR_ACCESSORS_DEFINED */
 #ifndef CSR_BASE
-#define CSR_BASE 0x300000000
+#define CSR_BASE 0x30000000
 #endif
 
 /* pwm */
