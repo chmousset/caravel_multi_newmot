@@ -74,6 +74,9 @@ module wrapped_project(
     assign irq          = active ? buf_irq          : 3'bz;
     `endif
 
+    `define OUTPUT 1'b0
+    `define INPUT 1'b1
+
     assign buf_io_oeb[`MPRJ_IO_PADS-1: `io_pwm +1] = {(`MPRJ_IO_PADS){`INPUT}};// default all inputs
     assign buf_io_oeb[`io_spi_miso] = `INPUT;
     assign buf_io_oeb[`io_spi_clk] = `OUTPUT;
