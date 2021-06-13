@@ -4,8 +4,8 @@
 module top(
 	input wire sys_clk,
 	input wire sys_rst,
-	inout wire gpio_gpio_0,
-	inout wire gpio_gpio_1,
+	output wire gpio_gpio_0,
+	output wire gpio_gpio_1,
 	output wire pwm_out,
 	output reg stepper0_step,
 	output reg stepper0_dir,
