@@ -399,7 +399,6 @@ assign main_motiongeneratoraxis_up = main_motiongeneratoraxis_overflow;
 assign main_motiongeneratoraxis_down = main_motiongeneratoraxis_underflow;
 always @(*) begin
 	main_motiongeneratoraxis_speed <= 20'd0;
-	main_motiongeneratoraxis_speed <= main_motiongeneratoraxis_speed[19:0];
 	main_motiongeneratoraxis_speed <= main_motiongeneratoraxis_speed_raw[39:20];
 end
 assign main_motiongeneratoraxis_done = (main_motiongeneratoraxis_position == main_motiongeneratoraxis_target_position);

@@ -2,3 +2,6 @@
 runs/
 properties/
 __pycache__/
+*.vcd
+*.xml
+sim_build/
