@@ -131,15 +131,17 @@ async def test_stepgen(dut):
 
 
 @cocotb.test()
-def test_qei(dut):
-    target = 10
+async def test_qei(dut):
     newmot = Newmot(dut)
+    dut.qei_a <= 0
+    dut.qei_b <= 0
+    dut.qei_i <= 0
     await newmot.reset()
     newmot.log.info("newmot reset done")
     await Timer(1)
 
     newmot.log.info(f"check QEI reset state")
-    await newmot.wbs.send_cycle([WBOp(Newmot.QEI_CNT),
+    wbRes = await newmot.wbs.send_cycle([WBOp(Newmot.QEI_CNT),
                                  WBOp(Newmot.QEI_INDEX_CNT)])
     assert wbRes[0].datrd == 0
     assert wbRes[1].datrd == 0
@@ -147,26 +149,56 @@ def test_qei(dut):
     dut.qei_a <= 0
     dut.qei_b <= 0
     dut.qei_i <= 0
-    yield Timer(10)
+    await Timer(1, 'us')
     dut.qei_a <= 1
     dut.qei_b <= 0
     dut.qei_i <= 0
-    yield Timer(10)
+    await Timer(1, 'us')
     dut.qei_a <= 1
     dut.qei_b <= 1
     dut.qei_i <= 1
-    yield Timer(10)
+    await Timer(1, 'us')
     dut.qei_a <= 0
     dut.qei_b <= 1
     dut.qei_i <= 0
-    yield Timer(10)
+    await Timer(1, 'us')
     dut.qei_a <= 0
     dut.qei_b <= 0
     dut.qei_i <= 0
-    yield Timer(10)
+    await Timer(1, 'us')
 
     newmot.log.info(f"check QEI reset state")
-    await newmot.wbs.send_cycle([WBOp(Newmot.QEI_CNT),
+    wbRes = await newmot.wbs.send_cycle([WBOp(Newmot.QEI_CNT),
                                  WBOp(Newmot.QEI_INDEX_CNT)])
+    dut.log.info(f"cnt={wbRes[0].datrd}, index_cnt={wbRes[1].datrd}")
     assert wbRes[0].datrd == 4
+    assert wbRes[1].datrd == 2
+
+
+    dut.qei_a <= 0
+    dut.qei_b <= 0
+    dut.qei_i <= 0
+    await Timer(1, 'us')
+    dut.qei_a <= 0
+    dut.qei_b <= 1
+    dut.qei_i <= 0
+    await Timer(1, 'us')
+    dut.qei_a <= 1
+    dut.qei_b <= 1
+    dut.qei_i <= 1
+    await Timer(1, 'us')
+    dut.qei_a <= 1
+    dut.qei_b <= 0
+    dut.qei_i <= 0
+    await Timer(1, 'us')
+    dut.qei_a <= 0
+    dut.qei_b <= 0
+    dut.qei_i <= 0
+    await Timer(1, 'us')
+
+    newmot.log.info(f"check QEI reset state")
+    wbRes = await newmot.wbs.send_cycle([WBOp(Newmot.QEI_CNT),
+                                 WBOp(Newmot.QEI_INDEX_CNT)])
+    dut.log.info(f"cnt={wbRes[0].datrd}, index_cnt={wbRes[1].datrd}")
+    assert wbRes[0].datrd == 0
     assert wbRes[1].datrd == 2
