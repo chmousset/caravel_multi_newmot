@@ -57,10 +57,6 @@ void main()
     reg_la1_oenb = 0; // output enable on
     reg_la1_data = 1 << 1;
 
-    // Inside caravel, the GPIO are output only.
-    gpio_oe_write(0b11); // both GPIOs are outputs 
-    gpio_o_write(0);
-
     // PWM test: configure to generate a square wave
     pwm_period_write(400);
     pwm_width_write(200);
