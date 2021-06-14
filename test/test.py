@@ -43,6 +43,10 @@ class Newmot(object):
     GENERATOR_PUSH_MOTION = (CSR_BASE + 0x1018) >> 2
     GENERATOR_HOME_DONE = (CSR_BASE + 0x101c) >> 2
 
+    QEI_CNT = (CSR_BASE + 0x1800) >> 2
+    QEI_INDEX_CNT = (CSR_BASE + 0x1804) >> 2
+
+
     def __init__(self, dut):
         if sys.version_info[0] < 3:
             raise Exception("Must be using Python 3")
@@ -125,3 +129,44 @@ async def test_stepgen(dut):
     assert wbRes[0].datrd == 0
     assert wbRes[1].datrd == target
 
+
+@cocotb.test()
+def test_qei(dut):
+    target = 10
+    newmot = Newmot(dut)
+    await newmot.reset()
+    newmot.log.info("newmot reset done")
+    await Timer(1)
+
+    newmot.log.info(f"check QEI reset state")
+    await newmot.wbs.send_cycle([WBOp(Newmot.QEI_CNT),
+                                 WBOp(Newmot.QEI_INDEX_CNT)])
+    assert wbRes[0].datrd == 0
+    assert wbRes[1].datrd == 0
+
+    dut.qei_a <= 0
+    dut.qei_b <= 0
+    dut.qei_i <= 0
+    yield Timer(10)
+    dut.qei_a <= 1
+    dut.qei_b <= 0
+    dut.qei_i <= 0
+    yield Timer(10)
+    dut.qei_a <= 1
+    dut.qei_b <= 1
+    dut.qei_i <= 1
+    yield Timer(10)
+    dut.qei_a <= 0
+    dut.qei_b <= 1
+    dut.qei_i <= 0
+    yield Timer(10)
+    dut.qei_a <= 0
+    dut.qei_b <= 0
+    dut.qei_i <= 0
+    yield Timer(10)
+
+    newmot.log.info(f"check QEI reset state")
+    await newmot.wbs.send_cycle([WBOp(Newmot.QEI_CNT),
+                                 WBOp(Newmot.QEI_INDEX_CNT)])
+    assert wbRes[0].datrd == 4
+    assert wbRes[1].datrd == 2

@@ -5,14 +5,14 @@
 // update this to the name of your module
 module wrapped_newmot(
 `ifdef USE_POWER_PINS
-    inout vdda1,	// User area 1 3.3V supply
-    inout vdda2,	// User area 2 3.3V supply
-    inout vssa1,	// User area 1 analog ground
-    inout vssa2,	// User area 2 analog ground
-    inout vccd1,	// User area 1 1.8V supply
-    inout vccd2,	// User area 2 1.8v supply
-    inout vssd1,	// User area 1 digital ground
-    inout vssd2,	// User area 2 digital ground
+    inout vdda1,                    // User area 1 3.3V supply
+    inout vdda2,                    // User area 2 3.3V supply
+    inout vssa1,                    // User area 1 analog ground
+    inout vssa2,                    // User area 2 analog ground
+    inout vccd1,                    // User area 1 1.8V supply
+    inout vccd2,                    // User area 2 1.8v supply
+    inout vssd1,                    // User area 1 digital ground
+    inout vssd2,                    // User area 2 digital ground
 `endif
     // wishbone interface
     input wire wb_clk_i,            // clock, runs at system clock
@@ -90,6 +90,9 @@ module wrapped_newmot(
     `define io_y_step 11
     `define io_y_dir 12
     `define io_pwm 13
+    `define io_qei_a 14
+    `define io_qei_b 15
+    `define io_qei_i 16
 
     assign buf_io_oeb[`MPRJ_IO_PADS-1: `io_pwm +1] = {(`MPRJ_IO_PADS){`INPUT}};// default all inputs
     assign buf_io_oeb[`io_spi_miso] = `INPUT;
@@ -99,13 +102,14 @@ module wrapped_newmot(
     assign buf_io_oeb[`io_pwm_native] = `OUTPUT;
     assign buf_io_oeb[`io_ub_tx] = `OUTPUT;
     assign buf_io_oeb[`io_ub_rx] = `INPUT;
-    assign buf_io_oeb[`io_gpio_gpio0] = `OUTPUT;
-    assign buf_io_oeb[`io_gpio_gpio1] = `OUTPUT;
     assign buf_io_oeb[`io_x_step] = `OUTPUT;
     assign buf_io_oeb[`io_x_dir] = `OUTPUT;
     assign buf_io_oeb[`io_y_step] = `OUTPUT;
     assign buf_io_oeb[`io_y_dir] = `OUTPUT;
     assign buf_io_oeb[`io_pwm] = `OUTPUT;
+    assign buf_io_oeb[`io_qei_a] = `INPUT;
+    assign buf_io_oeb[`io_qei_b] = `INPUT;
+    assign buf_io_oeb[`io_qei_i] = `INPUT;
 
     top newmot (
         `ifdef USE_POWER_PINS
@@ -135,13 +139,14 @@ module wrapped_newmot(
 
         // IO Pads
         .pwm(buf_io_out[`io_pwm_native]),
-        .gpio_gpio_0(buf_io_out[`io_gpio_gpio0]),
-        .gpio_gpio_1(buf_io_out[`io_gpio_gpio1]),
         .stepper0_step(buf_io_out[`io_x_step]),
         .stepper0_dir(buf_io_out[`io_x_dir]),
         .uartbone_tx(buf_io_out[`io_ub_tx]),
         .uartbone_rx(buf_io_out[`io_ub_rx]),
-        .pwm_out(buf_io_out[`io_pwm])
+        .pwm_out(buf_io_out[`io_pwm]),
+        .qei_a(io_in[io_qei_a]),
+        .qei_a(io_in[io_qei_b]),
+        .qei_a(io_in[io_qei_i])
     );
 
 
