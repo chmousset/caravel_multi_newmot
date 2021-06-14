@@ -29,8 +29,7 @@ async def test_start(dut):
     await with_timeout(RisingEdge(dut.uut.mprj.wrapped_newmot.active), 180, 'us')
 
     # wait start of motion
-    await with_timeout(RisingEdge(dut.uut.mprj.wrapped_newmot.newmot.gpio_gpio_0), 2000, 'us')
+    await with_timeout(FallingEdge(dut.uut.mprj.wrapped_newmot.newmot.main_motiongeneratoraxis_done), 200, 'us')
 
     # wait end of motion
-    await with_timeout(RisingEdge(dut.uut.mprj.wrapped_newmot.newmot.gpio_gpio_1), 200, 'us')
-
+    await with_timeout(RisingEdge(dut.uut.mprj.wrapped_newmot.newmot.main_motiongeneratoraxis_done), 200, 'us')

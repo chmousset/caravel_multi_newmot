@@ -73,7 +73,6 @@ void main()
 
     // Stepgen test: generate 10 step forward
     while(!generator_ready_axis_x_ready_read()); // wait for the axis to be ready taking new command
-    gpio_o_gpio_0_write(1); // mark the beginning of the motion
     generator_axis_x_target_position_write(10);
     generator_axis_x_start_speed_write(0);
     generator_axis_x_acceleration_write(100);
@@ -86,5 +85,4 @@ void main()
     generator_axis_x_acceleration_write(-100);
     generator_push_motion_write(1);
     while(!generator_home_done_axis_x_home_done_read()); // wait for all motion completion
-    gpio_o_gpio_1_write(1); // mark the end of the motion
 }
