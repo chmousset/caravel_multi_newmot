@@ -144,9 +144,9 @@ module wrapped_newmot(
         .uartbone_tx(buf_io_out[`io_ub_tx]),
         .uartbone_rx(buf_io_out[`io_ub_rx]),
         .pwm_out(buf_io_out[`io_pwm]),
-        .qei_a(io_in[io_qei_a]),
-        .qei_a(io_in[io_qei_b]),
-        .qei_a(io_in[io_qei_i])
+        .qei_a(io_in[`io_qei_a]),
+        .qei_b(io_in[`io_qei_b]),
+        .qei_i(io_in[`io_qei_i])
     );
 
 
