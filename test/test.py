@@ -27,8 +27,7 @@ class Newmot(object):
     # clock frequency is 50Mhz
     PERIOD = (20, "ns")
 
-    # BASEADDRESS = 0x30000000
-    CSR_BASE = 0x00000000
+    CSR_BASE = 0x30000000
 
     PWM_ENABLE = (CSR_BASE + 0) >> 2
     PWM_WIDTH  = (CSR_BASE + 0x4) >> 2

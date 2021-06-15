@@ -64,8 +64,6 @@ void main()
 
     // Stepper IO setup
     axis_x_stepper_x_mode_write(0b01); // step/dir
-    axis_x_stepper_x_invert_step_write(0);
-    axis_x_stepper_x_invert_dir_write(0);
 
     // Stepgen test: generate 10 step forward
     while(!generator_ready_axis_x_ready_read()); // wait for the axis to be ready taking new command

@@ -26,11 +26,11 @@ async def test_start(dut):
     dut.RSTB <= 1
 
     # wait with a timeout for the project to become active
-    await with_timeout(RisingEdge(dut.uut.mprj.wrapped_newmot.active), 150, 'us'5
+    await with_timeout(RisingEdge(dut.uut.mprj.wrapped_newmot.active), 150, 'us')
     dut._log.info("Project active")
 
     # wait start of motion
-    await with_timeout(FallingEdge(dut.uut.mprj.wrapped_newmot.newmot.main_motiongeneratoraxis_done), 500, 'us')
+    await with_timeout(FallingEdge(dut.uut.mprj.wrapped_newmot.newmot.main_motiongeneratoraxis_done), 1000, 'us')
 
     # wait end of motion
     await with_timeout(RisingEdge(dut.uut.mprj.wrapped_newmot.newmot.main_motiongeneratoraxis_done), 200, 'us')
