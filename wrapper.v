@@ -132,7 +132,7 @@ module wrapped_newmot(
         .wb_stb(wbs_stb_i),
         .wb_we(wbs_we_i),
         .wb_sel(wbs_sel_i),
-        .wb_adr(wbs_adr_i[14:2]),
+        .wb_adr(wbs_adr_i[31:2]), // litex does not generate the two lowest significant adress lines
         .wb_dat_r(buf_wbs_dat_o),
         .wb_dat_w(wbs_dat_i),
         .wb_ack(buf_wbs_ack_o),

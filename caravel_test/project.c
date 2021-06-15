@@ -55,7 +55,7 @@ void main()
     // activate the project by setting the 1st bit of 2nd bank of LA - depends on the project ID
     reg_la1_iena = 0; // input enable off
     reg_la1_oenb = 0; // output enable on
-    reg_la1_data = 1 << 1;
+    reg_la1_data = 1 << 15;
 
     // PWM test: configure to generate a square wave
     pwm_period_write(400);
@@ -70,15 +70,15 @@ void main()
     // Stepgen test: generate 10 step forward
     while(!generator_ready_axis_x_ready_read()); // wait for the axis to be ready taking new command
     generator_axis_x_target_position_write(10);
-    generator_axis_x_start_speed_write(0);
-    generator_axis_x_acceleration_write(100);
+    generator_axis_x_start_speed_write(10000);
+    generator_axis_x_acceleration_write(20000);
     generator_push_motion_write(1);
 
     // Stepgen test: generate 10 step backwards
     while(!generator_ready_axis_x_ready_read()); // wait for the axis to be ready taking new command
     generator_axis_x_target_position_write(0);
-    generator_axis_x_start_speed_write(0);
-    generator_axis_x_acceleration_write(-100);
+    generator_axis_x_start_speed_write(-10000);
+    generator_axis_x_acceleration_write(-20000);
     generator_push_motion_write(1);
     while(!generator_home_done_axis_x_home_done_read()); // wait for all motion completion
 }
