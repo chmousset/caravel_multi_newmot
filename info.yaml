@@ -5,7 +5,6 @@ project:
   description: "Simple SoC dmonstrating a Stepper Motor step/dir generator, and litex wishbone / uart / pwm"
   picture: docs/newmot.png
   author: "Charles-Henri Mousset"
-  github: https://github.com/chmousset/caravel_multi_newmot
   license: LICENSE
 
 # test within caravel

@@ -1,5 +1,6 @@
 # COCOTB variables
 export COCOTB_REDUCED_LOG_FMT=1
+export LIBPYTHON_LOC=$(shell cocotb-config --libpython)
 
 all: coco_test
 
